@@ -1,5 +1,5 @@
 <h3 align="center">
-  harness2-hermes<br>
+  harness2-hermes-port<br>
   A Hermes Agent executor for Harness²
 </h3>
 
@@ -31,7 +31,7 @@ This repository is an **independent port** that adds a
 upstream's OpenCode and Codex executors. It is not a Google project and is not
 endorsed by the Harness² authors. The Claude Code executor port of the same
 method lives at
-the **harness2-claude-code** repository, published under the same GitHub account.
+the **harness2-claude-port** repository, published under the same GitHub account.
 
 What the port adds:
 
