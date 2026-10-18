@@ -46,7 +46,7 @@ account.
 - [What Hermes brings](#what-hermes-brings)
 - [Where Hermes needed workarounds](#where-hermes-needed-workarounds)
 - [Keeping the scores honest](#keeping-the-scores-honest)
-- [What the validation showed](#what-the-validation-showed)
+- [What to expect](#what-to-expect)
 - [Going further](#going-further)
 - [Citation](#citation)
 - [Contributing](#contributing)
