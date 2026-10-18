@@ -172,6 +172,7 @@ class GuardTests(unittest.TestCase):
 
 
 class AdapterSetupTests(unittest.TestCase):
+    @unittest.skipIf(LB.CC is None, "the Claude Code executor lives in its own repository")
     def test_base_tree_is_built_at_construction_and_repaired_whole(self):
         runs = scratch(self) / "runs"
         adapter = make_adapter(runs)
@@ -221,6 +222,7 @@ class ExecuteTests(unittest.TestCase):
         (run_dir / "rollout.json").write_text(json.dumps({"subtype": "success", "cost_usd": 0.01}))
         return {}
 
+    @unittest.skipIf(LB.CC is None, "the Claude Code executor lives in its own repository")
     def test_execute_marks_complete_and_resumes_without_rerunning(self):
         with patch.object(LB.CC, "run_rollout", side_effect=self.fake_rollout):
             run_dir = self.adapter.execute("t1", None, "ns/t1/base1")
@@ -234,6 +236,7 @@ class ExecuteTests(unittest.TestCase):
         self.assertTrue(RM.is_complete(run_dir, harness_dir=None))
         self.assertEqual(self.adapter.deliverable_files(run_dir), {"output/out.txt": "a\n"})
 
+    @unittest.skipIf(LB.CC is None, "the Claude Code executor lives in its own repository")
     def test_a_rollout_without_a_deliverable_stays_unmarked(self):
         def empty(install, run_dir, prompt, **kw):
             (run_dir / "rollout.json").write_text(json.dumps({"subtype": "error_max_turns"}))
@@ -382,6 +385,7 @@ class ReadBoundaryTests(unittest.TestCase):
         fake.chmod(0o755)
         return fake
 
+    @unittest.skipIf(LB.CC is None, "the Claude Code executor lives in its own repository")
     def test_a_claude_code_rollout_cannot_read_the_grader(self):
         fake = self.fake_bin("claude")
         with patch.dict(os.environ, {"PATH": f"{fake.parent}{os.pathsep}{os.environ['PATH']}"}):
@@ -405,6 +409,7 @@ class ReadBoundaryTests(unittest.TestCase):
             run_dir = adapter.execute("t1", None, "ns/t1/base1")
         self.assertEqual(adapter.deliverable_files(run_dir), {"output/out.txt": "refused errno=1"})
 
+    @unittest.skipIf(LB.CC is None, "the Claude Code executor lives in its own repository")
     def test_a_deliverable_that_links_to_the_grader_is_dropped_before_scoring(self):
         fake = self.fake_bin("claude")
         fake.write_text(
